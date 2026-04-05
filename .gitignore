@@ -1,0 +1,108 @@
+# Dependencies
+node_modules/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp
+.pnp.js
+
+# Maven
+target/
+*.war
+*.jar
+*.ear
+.m2/repository/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Jenkins
+*.jnl
+builds/
+.cache/
+workspace/
+@tmp/
+jenkins-*.xml
+config.xml
+hudson.*
+nextBuildNumber
+lastStable
+lastSuccessful
+*.tmp
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# AWS
+.aws/
+credentials
+config
+
+# Kubernetes
+*.yaml
+*.yml
+k8s/
+minikube/
+.kube/
+
+# Database
+mysql/
+db/
+*.sql
+*.dump
+
+# Certificates
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Archives
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# Temporary files
+tmp/
+temp/
