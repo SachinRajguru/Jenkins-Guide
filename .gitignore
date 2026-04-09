@@ -1,56 +1,81 @@
-# Dependencies
+# ===== CORE DIRECTORIES =====
 node_modules/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnp
-.pnp.js
-
-# Maven
 target/
-*.war
-*.jar
-*.ear
-.m2/repository/
-
-# Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
 env/
 venv/
 .venv/
-pip-log.txt
-pip-delete-this-directory.txt
+.m2/
+.aws/
+.kube/
+.vscode/
+.idea/
+.workspace/
+jenkins-data/
+jenkins-home/
+k8s/
+charts/
+argocd/
+coverage/
+.nyc_output/
+.tmp/
+temp/
 
-# Docker
-Dockerfile*
-docker-compose*.yml
-.dockerignore
+# ===== BUILD ARTIFACTS =====
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.exe
+*.dll
+*.dylib
+*.so
+*.pyc
+*.py[cod]
+*$py.class
+*.class
 
-# Jenkins
+# ===== DOCKER/K8S =====
+Dockerfile*.local
+docker-compose*.yml.local
+*.kubeconfig
+minikube/
+k3s/
+~/.minikube/
+secrets.yaml
+secret.yaml
+values-*.yaml
+
+# ===== JENKINS SPECIFIC =====
 *.jnl
+*.log
 builds/
 .cache/
-workspace/
-@tmp/
-jenkins-*.xml
+jobs/
 config.xml
 hudson.*
-nextBuildNumber
-lastStable
-lastSuccessful
-*.tmp
+jenkins-*.xml
+jenkins-cli.jar
+jenkins.war
+/workspace/
+.jenkins/
+hudson.model.UpdateCenter.xml*
+hudson.plugins.git.GitSCM.xml
+hudson.tasks.Mailer.xml
 
-# Logs
+# ===== LOGS =====
 *.log
-logs/
 *.log.*
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# OS generated files
+# ===== OS/IDE GENERATED =====
 .DS_Store
 .DS_Store?
 ._*
@@ -58,51 +83,73 @@ logs/
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-# IDEs
-.vscode/
-.idea/
 *.swp
 *.swo
 *~
+.project
+.classpath
+.settings/
+*.iws
+*.iml
+*.ipr
 
-# Environment variables
+# ===== ENVIRONMENT VARIABLES =====
 .env
 .env.local
 .env.*.local
+terraform.tfvars
+*terraform.tfvars*
 
-# AWS
-.aws/
-credentials
-config
-
-# Kubernetes
-*.yaml
-*.yml
-k8s/
-minikube/
-.kube/
-
-# Database
-mysql/
-db/
+# ===== DATABASE/CLUSTER =====
+*.db
+*.sqlite
+*.sqlite3
 *.sql
 *.dump
+mysql/
+db/
 
-# Certificates
+# ===== CERTIFICATES/SECRETS =====
 *.pem
 *.key
 *.crt
 *.p12
 *.pfx
+credentials
 
-# Archives
-*.zip
-*.tar.gz
-*.tgz
-*.rar
-*.7z
+# ===== PACKAGE MANAGERS =====
+.pnp
+.pnp.js
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
 
-# Temporary files
-tmp/
-temp/
+# ===== TERRAFORM =====
+terraform.tfstate
+terraform.tfstate.backup
+terraform/.terraform/
+
+# ===== GITHUB ACTIONS =====
+.github/workflows/*.yml.disabled
+
+# ===== TESTING COVERAGE =====
+.nyc_output/
+coverage/
+
+# ===== REPO-SPECIFIC (Jenkins Guide) =====
+# Local development clusters
+~/.minikube/
+~/.kube/config.backup
+# Helm charts
+charts/*.tgz
+# Local Jenkins volumes
+jenkins-data/
+# Minikube/K3s
+minikube/
+k3s/
