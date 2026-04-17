@@ -10,8 +10,6 @@ sudo apt update
 sudo apt install docker.io
 ```
 
----
-
 ### 2. Grant Permissions
 
 Add both **jenkins** and **ubuntu** users to Docker group:
@@ -22,25 +20,19 @@ usermod -aG docker jenkins
 usermod -aG docker ubuntu
 ```
 
----
-
 ### 3. Restart Docker
 
 ```bash
 systemctl restart docker
 ```
 
----
-
 ### 4. Restart Jenkins
 
 After permission changes, restart Jenkins:
 
-```
+```bash
 http://<ec2-instance-public-ip>:8080/restart
 ```
-
----
 
 ### 5. Verification
 
@@ -48,27 +40,19 @@ http://<ec2-instance-public-ip>:8080/restart
 * Docker-based pipelines (agents) will work
 * No need for sudo inside pipelines
 
----
-
 ### 6. Final Outcome
 
-✅ Docker installed and configured
-✅ Jenkins integrated with Docker daemon
-✅ Ready for:
+- ✅ Docker installed and configured
+- ✅ Jenkins integrated with Docker daemon
+- ✅ Ready for:
+    - CI/CD pipelines
+    - Docker builds
+    - Containerized deployments
 
-* CI/CD pipelines
-* Docker builds
-* Containerized deployments
-
----
-
-## 🚀 What’s Next?
+## What’s Next?
 
 You are now ready to:
-
 * Create Jenkins Pipelines
 * Build and manage Docker images
 * Push images to container registries
 * Deploy applications to Kubernetes (K8s)
-
----

@@ -11,7 +11,6 @@
 * Choose Ubuntu (recommended)
 
 <img width="994" alt="Launch EC2 Instance" src="https://user-images.githubusercontent.com/43399466/215974891-196abfe9-ace0-407b-abd2-adcffe218e3f.png">
----
 
 ### 2. Install Jenkins – Prerequisites
 
@@ -28,8 +27,6 @@ sudo apt install openjdk-17-jre
 java -version
 ```
 
----
-
 ### 3. Install Jenkins
 
 ```bash
@@ -43,8 +40,6 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 sudo apt-get update
 sudo apt-get install jenkins
 ```
-
----
 
 ### 4. Configure AWS Security Group (IMPORTANT)
 
@@ -64,17 +59,14 @@ By default, Jenkins is not accessible externally.
 > ⚠️ Best Practice: Avoid "All Traffic" in production. Allow only port **8080**.
 
 <img width="1187" alt="Security Group Rule" src="https://user-images.githubusercontent.com/43399466/215975712-2fc569cb-9d76-49b4-9345-d8b62187aa22.png">
----
 
 ### 5. Access Jenkins
 
 Open in browser:
 
-```
+```bash
 http://<ec2-instance-public-ip-address>:8080
 ```
-
----
 
 ### 6. Unlock Jenkins
 
@@ -88,7 +80,6 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 * Paste into Jenkins UI
 
 <img width="1291" alt="Unlock Jenkins" src="https://user-images.githubusercontent.com/43399466/215959008-3ebca431-1f14-4d81-9f12-6bb232bfbee3.png">
----
 
 ### 7. Initial Setup
 
@@ -108,7 +99,6 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 * Or skip if temporary setup
 
 <img width="990" alt="Create Admin User" src="https://user-images.githubusercontent.com/43399466/215959757-403246c8-e739-4103-9265-6bdab418013e.png">
----
 
 ### 8. Jenkins Ready
 
@@ -116,8 +106,6 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ✅ Jenkins installation is now complete
 ✅ You can start creating pipelines
-
----
 
 ### 9. Install Required Plugin (Docker Pipeline)
 
@@ -127,4 +115,3 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 * Install and **Restart Jenkins**
 
 <img width="1392" alt="Docker Pipeline Plugin" src="https://user-images.githubusercontent.com/43399466/215973898-7c366525-15db-4876-bd71-49522ecb267d.png">
----
