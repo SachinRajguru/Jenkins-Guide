@@ -104,8 +104,8 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 <img width="990" alt="Jenkins Dashboard" src="https://user-images.githubusercontent.com/43399466/215961440-3f13f82b-61a2-4117-88bc-0da265a67fa7.png">
 
-✅ Jenkins installation is now complete
-✅ You can start creating pipelines
+- ✅ Jenkins installation is now complete
+- ✅ You can start creating pipelines
 
 ### 9. Install Required Plugin (Docker Pipeline)
 

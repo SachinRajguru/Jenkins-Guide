@@ -1,0 +1,19 @@
+// First validation pipeline:
+// Runs Jenkins job inside a temporary Docker agent
+// and verifies Node is available using node --version.
+
+pipeline {
+    agent {
+        docker {
+            image 'node:20-alpine'
+        }
+    }
+
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
+}
