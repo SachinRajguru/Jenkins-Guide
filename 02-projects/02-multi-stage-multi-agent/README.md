@@ -85,10 +85,10 @@ A multi-stage pipeline has multiple logical phases.
 
 Example:
 
-```text
-Stage 1 → Backend Build
-Stage 2 → Frontend Build
-Stage 3 → Database Tasks
+```bash
+• Stage 1 → Frontend Build
+• Stage 2 → Backend Build
+• Stage 3 → Database Tasks
 ```
 
 Instead of doing everything in one step:
@@ -110,10 +110,10 @@ A multi-agent pipeline uses different execution agents.
 
 Example:
 
-```text
-Frontend → Node Container
-Backend → Maven Container
-Database → MySQL Container
+```bash
+• Frontend → Node Container
+• Backend → Maven Container
+• Database → MySQL Container
 ```
 
 Different stages.
@@ -256,7 +256,7 @@ pipeline {
             // Backend runs inside Maven container
             agent {
                 docker {
-                    image 'maven:3.8'
+                    image 'maven:3.9.15-eclipse-temurin-17'
                 }
             }
 
@@ -292,7 +292,7 @@ pipeline {
 
 ---
 
-## 10. Understanding agent none
+## 10. Understanding `agent none`
 
 ```groovy
 agent none
@@ -324,8 +324,8 @@ That defeats multi-agent design.
 
 Uses:
 
-```text
-node:16-alpine
+```bash
+node:20-alpine
 ```
 
 Runs:
@@ -419,24 +419,26 @@ Use:
 
 Execution:
 
-```text
+```bash
 Stage 1
 Create Node Container
 Run frontend commands
 Destroy container
-
+```
+```bash
 Stage 2
 Create Maven Container
 Run backend commands
 Destroy container
-
+```
+```bash
 Stage 3
 Create MySQL Container
 Run DB commands
 Destroy container
 ```
 
-Each stage gets:
+Each `stage` gets:
 
 Fresh isolated container.
 
@@ -473,18 +475,16 @@ No running containers
 
 Containers terminated automatically.
 
-Exactly as shown in transcript.
-
 ---
 
-## 16. Why This Is Better Than VM Worker Nodes
+## 16. Why This Is Better Than `VM Worker Nodes`
 
 Traditional approach:
 
-```text
-Worker 1 → Node VM
-Worker 2 → Maven VM
-Worker 3 → DB VM
+```bash
+• Worker 1 → Node VM
+• Worker 2 → Maven VM
+• Worker 3 → DB VM
 ```
 
 Problems:
