@@ -3,17 +3,32 @@
 // and verifies Node is available using node --version.
 
 pipeline {
+
+    // Defines where this pipeline will run
     agent {
+
+        // Use a Docker-based ephemeral agent
         docker {
+
+            // Pull Node 20 lightweight Alpine image
             image 'node:20-alpine'
         }
     }
 
+    // Defines pipeline stages
     stages {
+
+        // Single test stage
         stage('Test') {
+
             steps {
+
+                // Run command inside container
+                // Verifies Node is installed and agent works
                 sh 'node --version'
+
             }
         }
     }
+
 }

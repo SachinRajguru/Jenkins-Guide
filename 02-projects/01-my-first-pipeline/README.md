@@ -721,7 +721,7 @@ This is the foundation for:
 
 Next:
 
-```text
+```bash
 02-multi-stage-multi-agent/
 ```
 
