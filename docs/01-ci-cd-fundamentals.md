@@ -1,4 +1,5 @@
-# `01-ci-cd-fundamentals.md`
+
+## 📄 `01-ci-cd-fundamentals.md`
 
 ## CI/CD in DevOps
 ### From Jenkins Pipelines to Modern GitHub Actions Workflows
@@ -54,8 +55,6 @@ This guide explains:
 * Real-world enterprise practices
 * Interview preparation
 * Practical understanding
-
-The original teaching sequence from the transcript has been preserved exactly.
 
 ---
 
@@ -128,6 +127,8 @@ Similarly, applications are finally deployed for customers.
 
 Together, they automate the entire software release lifecycle.
 
+---
+
 ## 3. Real-World Software Delivery Lifecycle
 
 Every software organization follows a delivery lifecycle.
@@ -175,6 +176,8 @@ Modern organizations release software in:
 * Sometimes minutes
 
 Automation is the only practical solution.
+
+---
 
 ## 4. Manual Delivery vs Automated Delivery
 
