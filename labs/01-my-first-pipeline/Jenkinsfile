@@ -1,0 +1,18 @@
+
+// Minimal pipeline to verify Jenkins Docker agent execution
+
+pipeline {
+    agent {
+        docker {
+            image 'node:20-alpine'
+        }
+    }
+
+    stages {
+        stage('Validation') {
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
+}
