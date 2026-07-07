@@ -1,173 +1,110 @@
 
-# 📄 `jenkins-installation + docker-agent-setup`
+## 📄 `labs/README.md`
 
-## Jenkins Installation on AWS EC2
+## Jenkins Labs Overview
 
-### 1. Launch EC2 Instance
+## Table of Contents
 
-* Go to **AWS Console**
-* Navigate to **EC2 → Instances**
-* Click **Launch Instance**
-* Choose Ubuntu (recommended)
+1. [Introduction](#1-introduction)
+2. [What This Contains](#2-what-this-contains)
+3. [Learning Path](#3-learning-path)
+   - [Lab 1](#lab-1)
+   - [Lab 2](#lab-2)
+4. [Lab Structure](#4-lab-structure)
+5. [How to Run](#5-how-to-run)
+6. [Core Concepts](#6-core-concepts)
+7. [CI Execution Flow](#7-ci-execution-flow)
+8. [Requirements](#8-requirements)
+9. [Key Value](#9-key-value)
+10. [Next Step](#10-next-step)
+11. [Final Note](#final-note)
 
-<img width="994" alt="Launch EC2 Instance" src="https://user-images.githubusercontent.com/43399466/215974891-196abfe9-ace0-407b-abd2-adcffe218e3f.png">
+## 1. Introduction
 
-### 2. Install Jenkins – Prerequisites
+This repository contains **hands-on Jenkins labs using Docker-based execution environments**.
 
-#### Install Java (JDK 17)
+It takes you from:
 
-```bash
-sudo apt update
-sudo apt install openjdk-17-jre
+> Jenkins basics → Multi-stage CI → Real-world pipeline architecture
+
+## 2. What This Contains
+
+```text
+labs/
+├── 01-my-first-pipeline
+├── 02-multi-stage-multi-agent
+└── README.md
 ```
 
-#### Verify Java Installation
+## 3. Learning Path
 
-```bash
-java -version
+### Lab 1
+
+* Jenkins + Docker integration
+* First pipeline execution
+* Node.js container validation
+
+### Lab 2
+
+* Multi-stage pipelines
+* Multi-agent execution model
+* Real CI/CD simulation
+
+## 4. Lab Structure
+
+Each lab contains:
+
+```text
+Jenkinsfile → Pipeline definition
+README.md   → Execution guide
 ```
 
-### 3. Install Jenkins
+## 5. How to Run
 
-```bash
-curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
-  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+1. Clone repo
+2. Create Jenkins pipeline job
+3. Point to Jenkinsfile path
+4. Run build
 
-echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-  https://pkg.jenkins.io/debian binary/ | sudo tee \
-  /etc/apt/sources.list.d/jenkins.list > /dev/null
+## 6. Core Concepts
 
-sudo apt-get update
-sudo apt-get install jenkins
+* Jenkins Pipeline as Code
+* Docker-based CI execution
+* Ephemeral agents
+* Multi-stage pipelines
+* Multi-runtime environments
+
+## 7. CI Execution Flow
+
+```text
+Trigger → Jenkins → Docker Container → Execute → Destroy
 ```
 
-### 4. Configure AWS Security Group (IMPORTANT)
+## 8. Requirements
 
-By default, Jenkins is not accessible externally.
+* Jenkins installed
+* Docker installed
+* Jenkins Docker plugin
+* Jenkins Docker permissions configured
 
-#### Open Port 8080:
+## 9. Key Value
 
-* Go to **EC2 → Instances**
-* Select your instance
-* Scroll to **Security → Security Groups**
-* Add **Inbound Rule**:
+After completing these labs, you understand:
 
-  * Type: Custom TCP
-  * Port: 8080
-  * Source: Anywhere (0.0.0.0/0) *(or restrict as needed)*
+* How real CI pipelines run
+* How Docker is used in CI
+* How multi-stage pipelines work
+* How modern CI/CD systems are designed
 
-> ⚠️ Best Practice: Avoid "All Traffic" in production. Allow only port **8080**.
+## 10. Next Step
 
-<img width="1187" alt="Security Group Rule" src="https://user-images.githubusercontent.com/43399466/215975712-2fc569cb-9d76-49b4-9345-d8b62187aa22.png">
+Advance to:
 
-### 5. Access Jenkins
+* Docker image build pipelines
+* Kubernetes deployments
+* GitOps with Argo CD
+* Production CI/CD systems
 
-Open in browser:
+## Final Note
 
-```bash
-http://<ec2-instance-public-ip-address>:8080
-```
-
-### 6. Unlock Jenkins
-
-Run on EC2:
-
-```bash
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-```
-
-* Copy the password
-* Paste into Jenkins UI
-
-<img width="1291" alt="Unlock Jenkins" src="https://user-images.githubusercontent.com/43399466/215959008-3ebca431-1f14-4d81-9f12-6bb232bfbee3.png">
-
-### 7. Initial Setup
-
-#### Install Plugins
-
-* Click **Install Suggested Plugins**
-
-<img width="1291" alt="Install Plugins" src="https://user-images.githubusercontent.com/43399466/215959294-047eadef-7e64-4795-bd3b-b1efb0375988.png">
-
-* ⏳ Wait for installation to complete
-
-<img width="1291" alt="Plugin Installation Progress" src="https://user-images.githubusercontent.com/43399466/215959398-344b5721-28ec-47a5-8908-b698e435608d.png">
-
-#### Create Admin User
-
-* Create user (recommended for long-term use)
-* Or skip if temporary setup
-
-<img width="990" alt="Create Admin User" src="https://user-images.githubusercontent.com/43399466/215959757-403246c8-e739-4103-9265-6bdab418013e.png">
-
-### 8. Jenkins Ready
-
-<img width="990" alt="Jenkins Dashboard" src="https://user-images.githubusercontent.com/43399466/215961440-3f13f82b-61a2-4117-88bc-0da265a67fa7.png">
-
-- ✅ Jenkins installation is now complete
-- ✅ You can start creating pipelines
-
-### 9. Install Required Plugin (Docker Pipeline)
-
-* Go to **Manage Jenkins → Manage Plugins**
-* Open **Available tab**
-* Search: `Docker Pipeline`
-* Install and **Restart Jenkins**
-
-<img width="1392" alt="Docker Pipeline Plugin" src="https://user-images.githubusercontent.com/43399466/215973898-7c366525-15db-4876-bd71-49522ecb267d.png">
-
-## Docker Agent Setup for Jenkins
-
-### 1. Install Docker on EC2
-
-```bash
-sudo apt update
-sudo apt install docker.io
-```
-
-### 2. Grant Permissions
-
-Add both **jenkins** and **ubuntu** users to Docker group:
-
-```bash
-sudo su -
-usermod -aG docker jenkins
-usermod -aG docker ubuntu
-```
-
-### 3. Restart Docker
-
-```bash
-systemctl restart docker
-```
-
-### 4. Restart Jenkins
-
-After permission changes, restart Jenkins:
-
-```bash
-http://<ec2-instance-public-ip>:8080/restart
-```
-
-### 5. Verification
-
-* Jenkins can now execute Docker commands
-* Docker-based pipelines (agents) will work
-* No need for sudo inside pipelines
-
-### 6. Final Outcome
-
-- ✅ Docker installed and configured
-- ✅ Jenkins integrated with Docker daemon
-- ✅ Ready for:
-    - CI/CD pipelines
-    - Docker builds
-    - Containerized deployments
-
-## What’s Next?
-
-You are now ready to:
-* Create Jenkins Pipelines
-* Build and manage Docker images
-* Push images to container registries
-* Deploy applications to Kubernetes (K8s)
+These labs simulate **real-world CI/CD engineering practices using Jenkins + Docker**, not simplified tutorials.
