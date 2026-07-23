@@ -1,0 +1,1 @@
+console.log("Spring Boot application loaded successfully");

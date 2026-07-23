@@ -1,0 +1,79 @@
+# =========================
+# Maven build
+# =========================
+target/
+
+# Maven wrapper (keep these if added)
+!.mvn/wrapper/maven-wrapper.jar
+
+# =========================
+# Java compiled files
+# =========================
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# =========================
+# IDE files
+# =========================
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Visual Studio Code
+.vscode/
+
+# Eclipse / Spring Tool Suite
+.classpath
+.project
+.settings/
+
+# NetBeans
+nbproject/
+build/
+
+# =========================
+# OS generated files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# Spring Boot logs
+spring.log
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+*.env
+
+# Local application configuration (optional)
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.swp
+
+# =========================
+# Docker local overrides
+# =========================
+docker-compose.override.yml
+
+# ==========================================================
+# Miscellaneous
+# ==========================================================
+*.pid
+*.seed
