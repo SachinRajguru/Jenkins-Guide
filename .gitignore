@@ -15,7 +15,6 @@ jenkins-data/
 jenkins-home/
 k8s/
 charts/
-argocd/
 coverage/
 .nyc_output/
 .tmp/
