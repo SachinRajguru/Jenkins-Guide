@@ -1,0 +1,147 @@
+pipeline {
+
+    // Run the pipeline inside our custom Jenkins Docker agent
+    agent {
+        docker {
+            image 'sachinrajguru/jenkins-docker-agent:v1'
+            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
+
+    stages {
+
+        // Checkout source code from Git repository
+        stage('Checkout Source Code') {
+            steps {
+
+                echo 'Checking out source code...'
+
+                sh 'pwd'
+                sh 'ls -ltr'
+            }
+        }
+
+
+        // Build Spring Boot application and run tests
+        stage('Build and Test') {
+            steps {
+
+                echo 'Building and testing the Spring Boot application...'
+
+                sh '''
+                    cd projects/01-spring-boot-cicd-gitops-deployment/spring-boot-app
+
+                    mvn clean package
+                '''
+            }
+        }
+
+
+        // Perform static code analysis using SonarQube
+        stage('Static Code Analysis') {
+
+            environment {
+                SONAR_URL = "http://<SONARQUBE_SERVER_IP>:9000"
+            }
+
+            steps {
+
+                echo 'Performing static code analysis...'
+
+                withCredentials([
+                    string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')
+                ]) {
+
+                    sh '''
+                        cd projects/01-spring-boot-cicd-gitops-deployment/spring-boot-app
+
+                        mvn sonar:sonar \
+                        -Dsonar.login=$SONAR_AUTH_TOKEN \
+                        -Dsonar.host.url=${SONAR_URL}
+                    '''
+                }
+            }
+        }
+
+
+        // Build Docker image and push it to Docker Hub
+        stage('Build and Push Docker Image') {
+
+            environment {
+                DOCKER_IMAGE = "sachinrajguru/spring-boot-app:${BUILD_NUMBER}"
+            }
+
+            steps {
+
+                echo 'Building and pushing Docker image...'
+
+                script {
+
+                    sh '''
+                        cd projects/01-spring-boot-cicd-gitops-deployment/spring-boot-app
+
+                        docker build -t ${DOCKER_IMAGE} .
+                    '''
+
+
+                    def dockerImage = docker.image("${DOCKER_IMAGE}")
+
+
+                    docker.withRegistry(
+                        'https://index.docker.io/v1/',
+                        'docker-cred'
+                    ) {
+
+                        dockerImage.push()
+
+                    }
+                }
+            }
+        }
+
+
+        // Update Kubernetes deployment manifest with new image tag
+        stage('Update Kubernetes Deployment Manifest') {
+
+            environment {
+
+                GIT_REPO_NAME = "Jenkins-Guide"
+                GIT_USER_NAME = "SachinRajguru"
+
+            }
+
+            steps {
+
+                echo 'Updating Kubernetes deployment manifest...'
+
+
+                withCredentials([
+                    string(credentialsId: 'github', variable: 'GITHUB_TOKEN')
+                ]) {
+
+
+                    sh '''
+
+                        git config user.email "YOUR_GITHUB_EMAIL"
+                        git config user.name "Sachin Rajguru"
+
+
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" \
+                        projects/01-spring-boot-cicd-gitops-deployment/spring-boot-app-manifests/deployment.yml
+
+
+                        git add \
+                        projects/01-spring-boot-cicd-gitops-deployment/spring-boot-app-manifests/deployment.yml
+
+
+                        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+
+
+                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+
+                    '''
+                }
+            }
+        }
+    }
+}
