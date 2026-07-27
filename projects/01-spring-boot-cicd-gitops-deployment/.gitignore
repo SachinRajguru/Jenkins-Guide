@@ -1,0 +1,40 @@
+# Maven build output
+target/
+
+# Compiled Java classes
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Spring Boot generated files
+spring.log
+
+# Environment files
+.env
+
+# Docker
+docker-compose.override.yml
+
+# Temporary files
+*.tmp
+*.swp
